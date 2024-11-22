@@ -22,6 +22,21 @@ public class CocktailController {
     }
 
     @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/f/i/{ingredient}")
+    public ResponseEntity<List<Cocktail>> findByIngredient(@PathVariable String ingredient){
+        List<Cocktail> list = service.findByIngredient(ingredient);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/f/a/{alcoholic}")
+    public ResponseEntity<List<Cocktail>> findByAlcoholic(@PathVariable String alcoholic){
+        List<Cocktail> list = service.findByAlcoholic(alcoholic);
+        return ResponseEntity.ok().body(list);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/img/{path}")
     public ResponseEntity<String> getImage(@PathVariable String path){
         String img = service.getImage(path);

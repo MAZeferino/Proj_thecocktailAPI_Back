@@ -16,4 +16,14 @@ public interface  CocktailRepository extends JpaRepository<Cocktail, Long>{
     @Transactional
     @Query("SELECT c FROM Cocktail c WHERE c.name LIKE :letter%")
     List<Cocktail> findByLetter(String letter);
+
+    @Modifying
+    @Transactional
+    @Query("SELECT c FROM Cocktail c WHERE c.ingredients ILIKE %:ingredient%")
+    List<Cocktail> findByIngredient(String ingredient);
+
+    @Modifying
+    @Transactional
+    @Query("SELECT c FROM Cocktail c WHERE c.alcoholic ILIKE :alcoholic")
+    List<Cocktail> findByAlcoholic(String alcoholic);
 }

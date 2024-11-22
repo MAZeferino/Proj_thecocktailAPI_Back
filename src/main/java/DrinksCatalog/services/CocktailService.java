@@ -28,7 +28,15 @@ public class CocktailService {
     }
 
     public List<Cocktail> getByLetter(String letter){
-        return repository.findByLetter(("m").toUpperCase());
+        return repository.findByLetter((letter).toUpperCase());
+    }
+
+    public List<Cocktail> findByIngredient(String ingredient){
+        return repository.findByIngredient((ingredient));
+    }
+
+    public List<Cocktail> findByAlcoholic(String alcoholic){
+        return repository.findByAlcoholic((alcoholic));
     }
 
     private static void disableSSLCertificateChecking() {
