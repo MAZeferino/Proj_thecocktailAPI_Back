@@ -39,6 +39,10 @@ public class CocktailService {
         return repository.findByAlcoholic((alcoholic));
     }
 
+    public List<Cocktail> findByCategory(String category){
+        return repository.findByCategory((category));
+    }
+
     private static void disableSSLCertificateChecking() {
         try {
             TrustManager[] trustAllCerts = new TrustManager[] {

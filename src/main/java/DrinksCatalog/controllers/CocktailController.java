@@ -35,6 +35,13 @@ public class CocktailController {
         return ResponseEntity.ok().body(list);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/f/c/{category}")
+    public ResponseEntity<List<Cocktail>> findByCategory(@PathVariable String category){
+        List<Cocktail> list = service.findByCategory(category);
+        return ResponseEntity.ok().body(list);
+    }
+
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/img/{path}")
