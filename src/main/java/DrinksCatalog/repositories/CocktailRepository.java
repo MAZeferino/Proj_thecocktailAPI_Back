@@ -31,4 +31,9 @@ public interface  CocktailRepository extends JpaRepository<Cocktail, Long>{
     @Transactional
     @Query("SELECT c FROM Cocktail c WHERE c.category ILIKE %:category%")
     List<Cocktail> findByCategory(String category);
+
+    @Modifying
+    @Transactional
+    @Query("SELECT c FROM Cocktail c ORDER BY RANDOM() LIMIT 40")
+    List<Cocktail> getRandonsDrinks();
 }

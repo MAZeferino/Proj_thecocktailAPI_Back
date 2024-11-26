@@ -32,15 +32,19 @@ public class CocktailService {
     }
 
     public List<Cocktail> findByIngredient(String ingredient){
-        return repository.findByIngredient((ingredient));
+        return repository.findByIngredient(ingredient);
     }
 
     public List<Cocktail> findByAlcoholic(String alcoholic){
-        return repository.findByAlcoholic((alcoholic));
+        return repository.findByAlcoholic(alcoholic);
     }
 
     public List<Cocktail> findByCategory(String category){
-        return repository.findByCategory((category));
+        return repository.findByCategory(category);
+    }
+
+    public List<Cocktail> getRandonsDrinks(){
+        return repository.getRandonsDrinks();
     }
 
     private static void disableSSLCertificateChecking() {
