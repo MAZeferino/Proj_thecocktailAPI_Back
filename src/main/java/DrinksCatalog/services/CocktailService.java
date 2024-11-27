@@ -2,7 +2,9 @@ package DrinksCatalog.services;
 
 import DrinksCatalog.models.Cocktail;
 import DrinksCatalog.repositories.CocktailRepository;
+import DrinksCatalog.repositories.specifications.CocktailSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,24 +29,27 @@ public class CocktailService {
         return restTemplate.getForObject(url, String.class);
     }
 
-    public List<Cocktail> getByLetter(String letter){
-        return repository.findByLetter((letter).toUpperCase());
-    }
-
-    public List<Cocktail> findByIngredient(String ingredient){
-        return repository.findByIngredient(ingredient);
-    }
-
-    public List<Cocktail> findByAlcoholic(String alcoholic){
-        return repository.findByAlcoholic(alcoholic);
-    }
-
-    public List<Cocktail> findByCategory(String category){
-        return repository.findByCategory(category);
-    }
-
     public List<Cocktail> getRandonsDrinks(){
         return repository.getRandonsDrinks();
+    }
+
+    public List<Cocktail> findDrinks(String letter, String ingredient, String alcoholic, String category) {
+        Specification<Cocktail> spec = Specification.where(null);
+
+        if (letter != null && !letter.isEmpty()) {
+            spec = spec.and(CocktailSpecifications.hasNameStartingWith(letter));
+        }
+        if (ingredient != null && !ingredient.isEmpty()) {
+            spec = spec.and(CocktailSpecifications.hasIngredient(ingredient));
+        }
+        if (alcoholic != null && !alcoholic.isEmpty()) {
+            spec = spec.and(CocktailSpecifications.isAlcoholic(alcoholic));
+        }
+        if (category != null && !category.isEmpty()) {
+            spec = spec.and(CocktailSpecifications.hasCategory(category));
+        }
+
+        return repository.findAll(spec);
     }
 
     private static void disableSSLCertificateChecking() {

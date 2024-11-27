@@ -15,38 +15,20 @@ public class CocktailController {
     private CocktailService service;
 
     @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping("/f/l/{letter}")
-    public ResponseEntity<List<Cocktail>> getByLetter(@PathVariable String letter){
-        List<Cocktail> list = service.getByLetter(letter);
-        return ResponseEntity.ok().body(list);
-    }
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping("/f/i/{ingredient}")
-    public ResponseEntity<List<Cocktail>> findByIngredient(@PathVariable String ingredient){
-        List<Cocktail> list = service.findByIngredient(ingredient);
-        return ResponseEntity.ok().body(list);
-    }
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping("/f/a/{alcoholic}")
-    public ResponseEntity<List<Cocktail>> findByAlcoholic(@PathVariable String alcoholic){
-        List<Cocktail> list = service.findByAlcoholic(alcoholic);
-        return ResponseEntity.ok().body(list);
-    }
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping("/f/c/{category}")
-    public ResponseEntity<List<Cocktail>> findByCategory(@PathVariable String category){
-        List<Cocktail> list = service.findByCategory(category);
-        return ResponseEntity.ok().body(list);
-    }
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping("/f/r")
+    @GetMapping("/filter/r")
     public ResponseEntity<List<Cocktail>> getRandonsDrinks(){
         List<Cocktail> list = service.getRandonsDrinks();
         return ResponseEntity.ok().body(list);
+    }
+
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/filterby")
+    public List<Cocktail> findCocktails(
+            @RequestParam(required = false) String letter,
+            @RequestParam(required = false) String ingredient,
+            @RequestParam(required = false) String alcoholic,
+            @RequestParam(required = false) String category) {
+        return service.findDrinks(letter, ingredient, alcoholic, category);
     }
 
 
