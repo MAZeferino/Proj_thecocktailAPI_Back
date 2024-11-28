@@ -11,7 +11,7 @@ public class CocktailSpecifications {
 
     public static Specification<Cocktail> hasIngredient(String ingredient) {
         return (root, query, builder) ->
-                ingredient != null ? builder.like(builder.lower(root.get("ingredients")), "%" + ingredient.toLowerCase() + "%") : null;
+                ingredient != null ? builder.like(builder.lower(root.get("ingredients")), "%" + ingredient.toLowerCase() + ",%") : null;
     }
 
     public static Specification<Cocktail> isAlcoholic(String alcoholic) {
