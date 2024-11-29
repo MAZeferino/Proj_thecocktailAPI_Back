@@ -15,6 +15,6 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, JpaSp
 
     @Modifying
     @Transactional
-    @Query("SELECT c FROM Cocktail c ORDER BY RANDOM() LIMIT 40")
+    @Query("SELECT c FROM Cocktail c ORDER BY RANDOM() LIMIT 60")
     List<Cocktail> getRandonsDrinks();
 }

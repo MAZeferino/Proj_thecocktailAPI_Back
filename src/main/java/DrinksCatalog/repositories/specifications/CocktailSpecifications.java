@@ -4,6 +4,12 @@ import DrinksCatalog.models.Cocktail;
 import org.springframework.data.jpa.domain.Specification;
 
 public class CocktailSpecifications {
+
+    public static Specification<Cocktail> searchDrinksWith(String search) {
+        return (root, query, builder) ->
+                search != null ? builder.like(builder.lower(root.get("name")), "%" + search.toLowerCase() + "%") : null;
+    }
+
     public static Specification<Cocktail> hasNameStartingWith(String letter) {
         return (root, query, builder) ->
                 letter != null ? builder.like(root.get("name"), letter + "%") : null;

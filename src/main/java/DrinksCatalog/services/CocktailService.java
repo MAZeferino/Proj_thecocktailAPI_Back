@@ -33,19 +33,28 @@ public class CocktailService {
         return repository.getRandonsDrinks();
     }
 
-    public List<Cocktail> findDrinks(String letter, String ingredient, String alcoholic, String category) {
+    public List<Cocktail> findDrinks(String search, String letter, String ingredient, String alcoholic, String category) {
         Specification<Cocktail> spec = Specification.where(null);
+        System.err.println(search);
 
+        if (search != null && !search.isEmpty()) {
+            System.out.println("a");
+            spec = spec.and(CocktailSpecifications.searchDrinksWith(search));
+        }
         if (letter != null && !letter.isEmpty()) {
+            System.out.println("b");
             spec = spec.and(CocktailSpecifications.hasNameStartingWith(letter));
         }
         if (ingredient != null && !ingredient.isEmpty()) {
+            System.out.println("c");
             spec = spec.and(CocktailSpecifications.hasIngredient(ingredient));
         }
         if (alcoholic != null && !alcoholic.isEmpty()) {
+            System.out.println("d");
             spec = spec.and(CocktailSpecifications.isAlcoholic(alcoholic));
         }
         if (category != null && !category.isEmpty()) {
+            System.out.println("e");
             spec = spec.and(CocktailSpecifications.hasCategory(category));
         }
 

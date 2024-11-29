@@ -24,11 +24,12 @@ public class CocktailController {
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/filterby")
     public List<Cocktail> findCocktails(
+            @RequestParam(required = false) String search,
             @RequestParam(required = false) String letter,
             @RequestParam(required = false) String ingredient,
             @RequestParam(required = false) String alcoholic,
             @RequestParam(required = false) String category) {
-        return service.findDrinks(letter, ingredient, alcoholic, category);
+        return service.findDrinks(search, letter, ingredient, alcoholic, category);
     }
 
 
